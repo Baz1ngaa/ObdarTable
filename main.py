@@ -32,7 +32,7 @@ def textget():
     import docx
     from docx import Document
     from docx.shared import Inches
-    doc = docx.Document("/home/danila/telegram_bot/lesson.docx")
+    doc = docx.Document("lesson.docx")
     columnsName=''
     Table={}       
     WeekDays=['monday', 'tuesday', 'wednesday', 'thursday','friday']  
