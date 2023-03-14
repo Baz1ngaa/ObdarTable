@@ -473,13 +473,13 @@ async def set_commands(bot: Bot):
     commands = [
         types.BotCommand(command="/gettable", description="Отримати розклад"),
         types.BotCommand(command="/start", description="Старт"),
-        
+        #types.BotCommand(command="/test", description="ntcn")
     ]
     await bot.set_my_commands(commands)
 
 
 async def main():
-    #
+    #await db_start()
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -496,7 +496,8 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-   
+    #executor.start_polling(dp, on_startup=on_startup)
+    #executor.start_polling(dp,skip_updates=True,on_startup=on_startup)
 
    
 
