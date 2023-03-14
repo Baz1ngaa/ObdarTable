@@ -20,7 +20,7 @@ nuwmerUsers=0
 for value in sql.execute("SELECT * FROM profileTel"):
     nuwmerUsers=nuwmerUsers+1
     print(value)
-print(nuwmerUsers)
+print("Всего пользователей:", nuwmerUsers)
 
 #print("dad")
 #qsq
