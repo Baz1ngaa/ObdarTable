@@ -37,7 +37,7 @@ class student(StatesGroup):
     ready=State()
     waiting_for_table=State()
     waiting_for_gettable=State()
-db=sqlite3.connect('telbot,db')
+db=sqlite3.connect('telbot.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -185,8 +185,8 @@ async def get_table(message: types.Message, state: FSMContext):
 
 
 
-    for value in sql.execute("SELECT * FROM profileTel"):
-        print(value)
+    #for value in sql.execute("SELECT * FROM profileTel"):
+       # print(value)
     
 
 
