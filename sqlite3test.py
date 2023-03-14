@@ -1,5 +1,5 @@
 import sqlite3
-db=sqlite3.connect('telbot,db')
+db=sqlite3.connect('telbot.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -15,14 +15,6 @@ if sql.fetchone() is None:
     sql.execute(f"INSERT INTO profileTel VALUES (?,?,?)", (user_id, user_region, user_klass))
     db.commit()
 
-#for value in sql.execute("SELECT * FROM profileTel"):
-   #@ print(value)
-iduser=121
-#sql.execute("SELECT * FROM profileTel")
-#print(sql.fetchone()[0])
-sql.execute(f"SELECT region, klass FROM profileTel WHERE login= '{iduser}' ")
-region, klass=sql.fetchone()
-
-print(region)
-
+for value in sql.execute("SELECT * FROM profileTel"):
+    print(value)
 
