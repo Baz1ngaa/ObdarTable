@@ -23,6 +23,8 @@ import sqlite3
 
 
 API_TOKEN = '5914668302:AAEYN4cPDQvI3_9CWCKwLHSzwmhkhXLBfZM'
+#5877501026:AAFdnaKLklAtL6fqvP3JQAa5ol5wwlPttM0 test
+#5914668302:AAEYN4cPDQvI3_9CWCKwLHSzwmhkhXLBfZM main
  
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
