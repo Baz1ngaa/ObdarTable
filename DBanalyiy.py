@@ -16,10 +16,11 @@ db.commit()
   #  db.commit()
 sql.execute("DELETE FROM profileTel WHERE login=121")
 db.commit()
-
+nuwmerUsers=0
 for value in sql.execute("SELECT * FROM profileTel"):
-    print('1')
+    nuwmerUsers=nuwmerUsers+1
     print(value)
+print(nuwmerUsers)
 
 #print("dad")
 #qsq
