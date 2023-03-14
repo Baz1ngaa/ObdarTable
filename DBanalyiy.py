@@ -18,6 +18,8 @@ sql.execute("DELETE FROM profileTel WHERE login=121")
 db.commit()
 
 for value in sql.execute("SELECT * FROM profileTel"):
+    print('1')
     print(value)
+
 #print("dad")
 #qsq
