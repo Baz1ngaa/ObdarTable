@@ -1,4 +1,3 @@
-
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.dispatcher.filters import Text 
@@ -23,6 +22,8 @@ import sqlite3
 
 
 API_TOKEN = '5877501026:AAFdnaKLklAtL6fqvP3JQAa5ol5wwlPttM0'
+#5877501026:AAFdnaKLklAtL6fqvP3JQAa5ol5wwlPttM0 test
+#5914668302:AAEYN4cPDQvI3_9CWCKwLHSzwmhkhXLBfZM main
  
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
@@ -35,7 +36,7 @@ class student(StatesGroup):
     ready=State()
     waiting_for_table=State()
     waiting_for_gettable=State()
-db=sqlite3.connect('telbot,db')
+db=sqlite3.connect('telbot.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -183,8 +184,8 @@ async def get_table(message: types.Message, state: FSMContext):
 
 
 
-    for value in sql.execute("SELECT * FROM profileTel"):
-        print(value)
+    #for value in sql.execute("SELECT * FROM profileTel"):
+       # print(value)
     
 
 
@@ -473,13 +474,13 @@ async def set_commands(bot: Bot):
     commands = [
         types.BotCommand(command="/gettable", description="Отримати розклад"),
         types.BotCommand(command="/start", description="Старт"),
-        #types.BotCommand(command="/test", description="ntcn")
+        
     ]
     await bot.set_my_commands(commands)
 
 
 async def main():
-    #await db_start()
+    #
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -496,10 +497,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-    #executor.start_polling(dp, on_startup=on_startup)
-    #executor.start_polling(dp,skip_updates=True,on_startup=on_startup)
-
    
-
-
-
