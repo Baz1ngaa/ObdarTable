@@ -472,7 +472,7 @@ async def main():
     register_handlers_student(dp)
     await set_commands(bot)
     await dp.start_polling()
- #test
+ 
 
 if __name__ == '__main__':
     asyncio.run(main())
