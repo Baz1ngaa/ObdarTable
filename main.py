@@ -16,9 +16,8 @@ from docx import Document
 from docx.shared import Inches
 from sqlite import db_start, create_profile, edit_profile
 import sqlite3
-
-#async def on_startup(_):
-   #await db_start()
+import os
+import olefile
 
 
 
@@ -44,9 +43,6 @@ sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     region TEXT,
     klass TEXT)""")
 db.commit()
-#global d_id
-#global d_region
-#global d_klass
 
 
 def textget():
@@ -117,10 +113,10 @@ def textget():
                 if(dayList[i]==''):
                         dayList[i]="Вiкно"
                         
-    
+                changeN=dayList[i]
+                changeN=changeN.replace("\n","")
+                dayList[i]=changeN
 
-    
-    
     return(Table)
     
 
@@ -131,7 +127,6 @@ async def cmd_start(message: types.Message, state: FSMContext):
         keyboard.add(region)
     await message.answer(f"Привіт, {message.from_user.full_name}, я допоможу тобі з розкладом. Для початку вибери часовий пояс:", reply_markup=keyboard)
     await state.set_state(student.waiting_for_region.state)
-    #await create_profile(user_data=message.from_user.id)
     global user_id
     user_id=message.from_user.id
     
@@ -146,8 +141,6 @@ async def region_chosen(message: types.Message, state: FSMContext):
     user_region=message.text.lower()
     sql.execute(f'UPDATE profileTel SET region = "{user_region}" WHERE login = "{user_id}"')
     db.commit()
-   # async with state.proxy() as data:
-        # data['region']=message.text.lower()
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     for klass in available_klass:
         keyboard.add(klass)
@@ -175,20 +168,13 @@ async def get_table(message: types.Message, state: FSMContext):
         keyboard.add(lesson)
     await message.answer("Тепер вибери день тижня:", reply_markup=keyboard)
     await state.set_state(student.waiting_for_table.state)
-    #await edit_profile(state, user_data=message.from_user.id)
     user_id=message.from_user.id
     sql.execute(f"SELECT login FROM profileTel WHERE login = '{user_id}'")
     if sql.fetchone() is None:
         sql.execute(f"INSERT INTO profileTel VALUES (?,?,?)", (user_id, user_region, user_klass))
         db.commit()
+
     
-
-
-
-    #for value in sql.execute("SELECT * FROM profileTel"):
-       # print(value)
-    
-
 
 async def waiting_table(message: types.Message, state: FSMContext):
     user_data = await state.get_data()
@@ -452,12 +438,6 @@ async def waiting_table(message: types.Message, state: FSMContext):
 
 
  
-
-                
-            
-    
-    
-
 def register_handlers_student(dp: Dispatcher):
     dp.register_message_handler(cmd_start, commands="start", state="*")
     dp.register_message_handler(get_table,commands="gettable", state="*")
